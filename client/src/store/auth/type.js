@@ -1,5 +1,5 @@
 export const START_LOGIN_AUTH = 'START_LOGIN_AUTH';
-export const START_SIGNIN_AUTH = 'START_SIGNIN_AUTH';
+export const START_SIGNUP_AUTH = 'START_SIGNUP_AUTH ';
 export const START_CHECK_AUTH = 'START_CHECK_AUTH';
 export const INIT_AUTH = 'INIT_AUTH';
 export const INIT_AUTH_ERR = 'INIT_AUTH_ERR';

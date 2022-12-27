@@ -6,8 +6,11 @@ import { setErrAuthTrueAC, setErrAuthFalseAC } from '../errorAuth/creators';
 export function startLoginAuthAC(password, email, navigate) {
   return { type: tp.START_LOGIN_AUTH, payload: { password, email, navigate } };
 }
-export function startSigninAuthAC() {
-  return { type: tp.START_SIGNIN_AUTH };
+export function startSignunpAuthAC(login, password, email, navigate) {
+  return {
+    type: tp.START_SIGNUP_AUTH,
+    payload: { login, password, email, navigate },
+  };
 }
 export function startCheckAuthAC() {
   return { type: tp.START_CHECK_AUTH };
@@ -69,33 +72,33 @@ export function logoutAuthErrAC(err) {
 //   }
 // };
 
-export const authSignUpAC =
-  (login, password, email, navigate) => async (dispatch) => {
-    dispatch(setLoadinTrue());
-    const response = await fetch('http://localhost:3005/signup', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        login,
-        password,
-        email,
-      }),
-    });
-    const { user } = await response.json();
+// export const authSignUpAC =
+//   (login, password, email, navigate) => async (dispatch) => {
+//     dispatch(setLoadinTrue());
+//     const response = await fetch('http://localhost:3005/signup', {
+//       method: 'POST',
+//       credentials: 'include',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         login,
+//         password,
+//         email,
+//       }),
+//     });
+//     const { user } = await response.json();
 
-    if (user) {
-      dispatch(setLoadinFalse());
-      dispatch(initAuthAC(user));
-      dispatch(setErrAuthFalseAC());
-      navigate('/home');
-    } else {
-      dispatch(setErrAuthTrueAC());
-      dispatch(setLoadinFalse());
-    }
-  };
+//     if (user) {
+//       dispatch(setLoadinFalse());
+//       dispatch(initAuthAC(user));
+//       dispatch(setErrAuthFalseAC());
+//       navigate('/home');
+//     } else {
+//       dispatch(setErrAuthTrueAC());
+//       dispatch(setLoadinFalse());
+//     }
+//   };
 
 // export const checkAuthAC = () => async (dispatch) => {
 //   try {

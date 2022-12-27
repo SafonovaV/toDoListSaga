@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSignUpAC } from '../../store/auth/creators';
+import { startSignunpAuthAC } from '../../store/auth/creators';
 
 import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
@@ -20,7 +20,9 @@ function Signup() {
   const auth = (e) => {
     e.preventDefault();
     const { login, password, email } = e.target;
-    dispatch(authSignUpAC(login.value, password.value, email.value, navigate));
+    dispatch(
+      startSignunpAuthAC(login.value, password.value, email.value, navigate)
+    );
   };
 
   const handleInput = (e) => {
