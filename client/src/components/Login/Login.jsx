@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { authLoginAC, initAuthAC } from '../../store/auth/creators';
+import { authLoginAC } from '../../store/auth/creators';
 import { useNavigate } from 'react-router-dom';
 import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
-import { setLoadinFalse, setLoadinTrue } from '../../store/isLoading/creators';
-import {
-  setErrAuthTrueAC,
-  setErrAuthFalseAC,
-} from '../../store/errorAuth/creators';
+
+
 
 export default function Login() {
   const isLoading = useSelector(getIsLoading());

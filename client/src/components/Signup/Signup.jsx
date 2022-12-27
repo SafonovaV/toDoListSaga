@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { initAuthAC, authSignUpAC } from '../../store/auth/creators';
-import {
-  setErrAuthTrueAC,
-  setErrAuthFalseAC,
-} from '../../store/errorAuth/creators';
-import { setLoadinFalse, setLoadinTrue } from '../../store/isLoading/creators';
+import { authSignUpAC } from '../../store/auth/creators';
+
 import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
 

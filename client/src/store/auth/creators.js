@@ -1,5 +1,5 @@
 import * as tp from './type';
-import { useNavigate } from 'react-router-dom';
+
 import { setLoadinFalse, setLoadinTrue } from '../isLoading/creators';
 import { setErrAuthTrueAC, setErrAuthFalseAC } from '../errorAuth/creators';
 
