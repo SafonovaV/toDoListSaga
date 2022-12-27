@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cl from './Form.module.css';
 import { useDispatch } from 'react-redux';
-import {  creatNewCase } from '../../store/cases/casesCreators';
+import { startAddNewCaseAC } from '../../store/cases/casesCreators';
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -15,7 +15,9 @@ export default function Form() {
     });
   };
   const onSubmitHandle = (e) => {
-    dispatch(creatNewCase(e, setFormValue));
+    e.preventDefault();
+    const { title, description } = e.target;
+    dispatch(startAddNewCaseAC(title.value, description.value, setFormValue));
   };
 
   return (

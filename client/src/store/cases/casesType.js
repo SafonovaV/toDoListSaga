@@ -1,7 +1,20 @@
+export const START_INIT_CASES = 'START_INIT_CASES';
 export const INIT_CASES = 'INIT_CASES';
-export const ADD_CASES = 'ADD_CASES';
-export const DELETE_CASES = 'DELETE_CASES';
-export const EDIT_CASES = 'EDIT_CASES';
+export const INIT_CASES_ERR = 'INIT_CASES_ERR';
 
+export const START_ADD_CASES = 'START_ADD_CASES';
+export const ADD_CASES = 'ADD_CASES';
+export const ADD_CASES_ERR = 'ADD_CASES_ERR';
+
+export const START_DELETE_CASES = 'START_DELETE_CASES';
+export const DELETE_CASES = 'DELETE_CASES';
+export const DELETE_CASES_ERR = 'DELETE_CASES_ERR';
+
+export const START_EDIT_CASES = 'START_EDIT_CASES';
+export const EDIT_CASES = 'EDIT_CASES';
+export const EDIT_CASES_ERR = 'EDIT_CASES_ERR';
+
+export const START_CHANGE_STATUS_CASE = 'START_CHANGE_STATUS_CASE';
 export const SET_STATUS_ZERO = 'SET_STATUS_ZERO';
 export const SET_STATUS_ONE = 'SET_STATUS_ONE';
+export const CHANGE_STATUS_CASE_ERR = 'START_CHANGE_STATUS_CASE_ERR';

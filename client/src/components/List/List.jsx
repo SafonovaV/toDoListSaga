@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCasesAC } from '../../store/cases/casesCreators';
+import { startInitCasesAC } from '../../store/cases/casesCreators';
 import { getIsLoading } from '../../store/isLoading/selector';
 import Item from '../Item/Item';
 import cl from './List.module.css';
@@ -11,7 +11,7 @@ export default function List() {
   const isLoading = useSelector(getIsLoading());
 
   useEffect(() => {
-    dispatch(getAllCasesAC());
+    dispatch(startInitCasesAC());
   }, []);
 
   if (isLoading) {

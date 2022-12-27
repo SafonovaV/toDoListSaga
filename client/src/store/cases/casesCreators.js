@@ -2,8 +2,48 @@ import * as tp from './casesType';
 import { setLoadinFalse, setLoadinTrue } from '../isLoading/creators';
 import { setVisModalFalse } from '../modal/modalCreators';
 
+export const startInitCasesAC = () => {
+  return {
+    type: tp.START_INIT_CASES,
+  };
+};
 export const initCases = (allCases) => {
   return { type: tp.INIT_CASES, payload: allCases };
+};
+export const initCasesErrAC = (err) => {
+  return { type: tp.INIT_CASES_ERR, payload: err };
+};
+
+//---------------------------------
+
+export const startAddNewCaseAC = (title, description, setFormValue) => {
+  return {
+    type: tp.START_ADD_CASES,
+    payload: { title, description, setFormValue },
+  };
+};
+export const addNewCase = (newCase) => {
+  return { type: tp.ADD_CASES, payload: newCase };
+};
+export const addNewCaseErr = (error) => {
+  return { type: tp.ADD_CASES_ERR, payload: error };
+};
+
+//-----------------------------------------------------
+
+export const startChangeCase = (title, description, caseId) => {
+  return { type: tp.START_EDIT_CASES, payload: { title, description, caseId } };
+};
+export const changeCase = (editCase) => {
+  return { type: tp.EDIT_CASES, payload: editCase };
+};
+export const changeCaseErr = (err) => {
+  return { type: tp.EDIT_CASES_ERR, payload: err };
+};
+//----------------------------------------------
+
+export const deleteCase = (id) => {
+  return { type: tp.DELETE_CASES, payload: id };
 };
 
 export const setStatusZero = (id) => {
@@ -14,75 +54,60 @@ export const setStatusOne = (id) => {
   return { type: tp.SET_STATUS_ONE, payload: id };
 };
 
-export const addNewCase = (newCase) => {
-  return { type: tp.ADD_CASES, payload: newCase };
-};
+// export const getAllCasesAC = () => async (dispatch) => {
+//   dispatch(setLoadinTrue());
+//   try {
+//     const response = await fetch('http://localhost:3005/case/all', {
+//       method: 'GET',
+//       credentials: 'include',
+//     });
+//     const { allCases } = await response.json();
 
-export const deleteCase = (id) => {
-  return { type: tp.DELETE_CASES, payload: id };
-};
+//     dispatch(initCases(allCases));
+//     dispatch(setLoadinFalse());
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-export const changeCase = (editCase) => {
-  return { type: tp.EDIT_CASES, payload: editCase };
-};
+// export const editCaseAndModalAC = (e, id) => async (dispatch) => {
+//   dispatch(setLoadinTrue());
+//   dispatch(setVisModalFalse());
 
-export const getAllCasesAC = () => async (dispatch) => {
-  dispatch(setLoadinTrue());
-  try {
-    const response = await fetch('http://localhost:3005/case/all', {
-      method: 'GET',
-      credentials: 'include',
-    });
-    const { allCases } = await response.json();
+//   const response = await fetch(`http://localhost:3005/case/${id}`, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-type': 'application/json',
+//     },
+//     body: JSON.stringify({ title, description }),
+//   });
+//   const { newEditCase } = await response.json();
+//   dispatch(changeCase(newEditCase));
+//   dispatch(setLoadinFalse());
+// };
 
-    dispatch(initCases(allCases));
-    dispatch(setLoadinFalse());
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const creatNewCase = (e, setFormValue) => async (dispatch) => {
+//   dispatch(setLoadinTrue());
 
-export const editCaseAndModalAC = (e, id) => async (dispatch) => {
-  dispatch(setLoadinTrue());
-  dispatch(setVisModalFalse());
-  e.preventDefault();
-  const title = e.target.title.value;
-  const description = e.target.description.value;
-  const response = await fetch(`http://localhost:3005/case/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ title, description }),
-  });
-  const { newEditCase } = await response.json();
-  dispatch(changeCase(newEditCase));
-  dispatch(setLoadinFalse());
-};
+//   const response = await fetch('http://localhost:3005/case', {
+//     method: 'POST',
+//     credentials: 'include',
+//     headers: {
+//       'Content-type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       title: title.value,
+//       description: description.value,
+//     }),
+//   });
+//   const { newCase } = await response.json();
 
-export const creatNewCase = (e, setFormValue) => async (dispatch) => {
-  dispatch(setLoadinTrue());
-  e.preventDefault();
-  const { title, description } = e.target;
-  const response = await fetch('http://localhost:3005/case', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      title: title.value,
-      description: description.value,
-    }),
-  });
-  const { newCase } = await response.json();
-
-  if (newCase) {
-    dispatch(setLoadinFalse());
-    dispatch(addNewCase(newCase));
-    setFormValue({ title: '', description: '' });
-  }
-};
+//   if (newCase) {
+//     dispatch(setLoadinFalse());
+//     dispatch(addNewCase(newCase));
+//     setFormValue({ title: '', description: '' });
+//   }
+// };
 
 export const changeStatusAC = (oneCase) => async (dispatch) => {
   dispatch(setLoadinTrue());

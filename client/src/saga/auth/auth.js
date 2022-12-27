@@ -1,13 +1,18 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import * as tp from '../store/auth/type';
-import * as actions from '../store/auth/creators';
-import { checkAuthFetch, loginAuthFetch, logoutFetch } from './authFetch';
-import { setLoadinTrue, setLoadinFalse } from '../store/isLoading/creators';
+import * as tp from '../../store/auth/type';
+import * as actions from '../../store/auth/creators';
+import {
+  checkAuthFetch,
+  loginAuthFetch,
+  logoutFetch,
+  signUpFetch,
+} from './authFetch';
+import { setLoadinTrue, setLoadinFalse } from '../../store/isLoading/creators';
 import {
   setErrAuthFalseAC,
   setErrAuthTrueAC,
-} from '../store/errorAuth/creators';
+} from '../../store/errorAuth/creators';
 
 function* checkAuth() {
   try {
@@ -16,6 +21,26 @@ function* checkAuth() {
       yield put(actions.initAuthAC(user));
     } else {
       yield put(actions.setNullAC());
+    }
+  } catch (error) {
+    console.log(error);
+    yield put(actions.initAuthErrAC(error));
+  }
+}
+
+function* authSignUp(state) {
+  yield put(setLoadinTrue());
+  const { login, password, email, navigate } = state.payload;
+  try {
+    const { user } = yield call(signUpFetch, { login, password, email });
+    if (user) {
+      yield put(setLoadinFalse());
+      yield put(actions.initAuthAC(user));
+      yield put(setErrAuthFalseAC());
+      navigate('/home');
+    } else {
+      yield put(setErrAuthTrueAC());
+      yield put(setLoadinFalse());
     }
   } catch (error) {
     console.log(error);
@@ -55,43 +80,6 @@ function* logoutAuth() {
   } catch (error) {
     console.log(error);
     yield put(actions.logoutAuthErrAC(error));
-  }
-}
-
-const signUpFetch = async ({ login, password, email }) => {
-  console.log('login, password, email', login, password, email);
-  const response = await fetch('http://localhost:3005/signup', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      login,
-      password,
-      email,
-    }),
-  });
-  return response.json();
-};
-
-function* authSignUp(state) {
-  yield put(setLoadinTrue());
-  const { login, password, email, navigate } = state.payload;
-  try {
-    const { user } = yield call(signUpFetch, { login, password, email });
-    if (user) {
-      yield put(setLoadinFalse());
-      yield put(actions.initAuthAC(user));
-      yield put(setErrAuthFalseAC());
-      navigate('/home');
-    } else {
-      yield put(setErrAuthTrueAC());
-      yield put(setLoadinFalse());
-    }
-  } catch (error) {
-    console.log(error);
-    yield put(actions.initAuthErrAC(error));
   }
 }
 

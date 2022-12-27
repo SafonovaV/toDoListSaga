@@ -6,6 +6,22 @@ export const checkAuthFetch = async () => {
   return response.json();
 };
 
+export const signUpFetch = async ({ login, password, email }) => {
+  const response = await fetch('http://localhost:3005/signup', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      login,
+      password,
+      email,
+    }),
+  });
+  return response.json();
+};
+
 export const loginAuthFetch = async ({ password, email }) => {
   const response = await fetch('http://localhost:3005/login', {
     method: 'POST',

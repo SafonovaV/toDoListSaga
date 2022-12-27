@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cl from './Edit.module.css';
-import { editCaseAndModalAC } from '../../store/cases/casesCreators';
+import { startChangeCase } from '../../store/cases/casesCreators';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -26,7 +26,10 @@ export default function Edit() {
   };
 
   const editCaseAndModal = (e) => {
-    dispatch(editCaseAndModalAC(e, editCase.id));
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+    dispatch(startChangeCase(title, description, editCase.id));
   };
 
   return (
