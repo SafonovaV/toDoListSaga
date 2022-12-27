@@ -2,13 +2,13 @@ import React from 'react';
 import cl from './NavBar.module.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutAC } from '../../store/auth/creators';
+import { startLogoutAC } from '../../store/auth/creators';
 
 export default function NavBar() {
   const isAuth = useSelector((store) => store.isAuth.isAuth);
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(logoutAC());
+    dispatch(startLogoutAC());
   };
 
   return (

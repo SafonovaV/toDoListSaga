@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { authLoginAC } from '../../store/auth/creators';
+import { startLoginAuthAC } from '../../store/auth/creators';
 import { useNavigate } from 'react-router-dom';
 import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
-
-
 
 export default function Login() {
   const isLoading = useSelector(getIsLoading());
@@ -21,7 +19,7 @@ export default function Login() {
     e.preventDefault();
     const { password, email } = e.target;
 
-    dispatch(authLoginAC(password.value, email.value, navigate));
+    dispatch(startLoginAuthAC(password.value, email.value, navigate));
   };
 
   const handleInput = (e) => {

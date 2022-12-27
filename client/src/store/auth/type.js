@@ -1,2 +1,9 @@
+export const START_LOGIN_AUTH = 'START_LOGIN_AUTH';
+export const START_SIGNIN_AUTH = 'START_SIGNIN_AUTH';
+export const START_CHECK_AUTH = 'START_CHECK_AUTH';
 export const INIT_AUTH = 'INIT_AUTH';
+export const INIT_AUTH_ERR = 'INIT_AUTH_ERR';
+
+export const START_LOGOUT_AUTH = 'START_LOGOUT_AUTH';
 export const SET_NULL = 'SET_NULL';
+export const LOGOUT_AUTH_ERR = 'LOGOUT_AUTH_ERR';

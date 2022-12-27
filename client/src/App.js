@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { initAuthAC, setNullAC, checkAuthAC } from './store/auth/creators';
+import { startCheckAuthAC } from './store/auth/creators';
 import './style/App.css';
 import Home from './components/Home/Home';
 import Welcome from './components/Welcome/Welcome';
@@ -12,7 +12,7 @@ import Signup from './components/Signup/Signup';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(checkAuthAC());
+    dispatch(startCheckAuthAC());
   }, []);
   return (
     <>

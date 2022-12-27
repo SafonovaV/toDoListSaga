@@ -35,6 +35,7 @@ const logIn = async (req, res) => {
       req.session.user = { name: findUser.login, id: findUser.id };
       req.session.save(() => {
         const { user } = req.session;
+        console.log('user', user);
         res.json({ user });
       });
     } else {
