@@ -1,0 +1,47 @@
+.nav {
+  width: 960px;
+  margin: 0 auto 50px;
+}
+
+.nav:before {
+  content: '';
+  display: block;
+  height: 50px;
+  width: 100%;
+  background: rgb(54, 54, 54);
+  position: absolute;
+  left: 0;
+  z-index: -1;
+}
+
+.nav_ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav_ul li {
+  float: left;
+}
+
+.nav_navLink {
+  color: rgb(255, 255, 255);
+  display: block;
+  height: 50px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 50px;
+}
+.nav_navLink:hover {
+  background-color: rgb(47, 67, 158);
+  color: white;
+}
+
+.active {
+  color: rgb(84, 197, 241);
+  cursor: default;
+}

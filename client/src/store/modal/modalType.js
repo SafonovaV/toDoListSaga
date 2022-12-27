@@ -1,0 +1,3 @@
+export const SET_VISIBLE_TRUE = 'SET_VISIBLE_TRUE';
+export const SET_VISIBLE_FALSE = 'SET_VISIBLE_FALSE';
+export const INIT_EDIT_CASE = 'INIT_EDIT_CASE';
