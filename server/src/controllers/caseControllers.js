@@ -22,7 +22,7 @@ const createNewPost = async (req, res) => {
       title,
       description,
       user_id: user.id,
-      status: 0,
+      status: false,
       raw: true,
     });
     res.json({ newCase });
@@ -46,8 +46,10 @@ const changeStatus = async (req, res) => {
 
   try {
     const oneCase = await Case.findOne({ where: { id } });
-    const newStatus = oneCase.status ? 0 : 1;
-    const answer = await Case.update({ status: newStatus }, { where: { id } });
+    const answer = await Case.update(
+      { status: !oneCase.status },
+      { where: { id } }
+    );
 
     res.json({ answer });
   } catch (error) {

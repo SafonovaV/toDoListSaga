@@ -16,22 +16,22 @@ export default function casesReducer(state = initialState, action) {
         ...state,
         cases: state.cases.filter((el) => el.id !== action.payload),
       };
-    case tp.SET_STATUS_ONE:
+    case tp.SET_STATUS_TRUE:
       return {
         ...state,
         cases: state.cases.map((el) => {
           if (el.id === action.payload) {
-            return { ...el, status: 1 };
+            return { ...el, status: true };
           }
           return el;
         }),
       };
-    case tp.SET_STATUS_ZERO:
+    case tp.SET_STATUS_FALSE:
       return {
         ...state,
         cases: state.cases.map((el) => {
           if (el.id === action.payload) {
-            return { ...el, status: 0 };
+            return { ...el, status: false };
           }
           return el;
         }),

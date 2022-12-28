@@ -65,8 +65,8 @@ function* changeStatus(state) {
     const { answer } = yield call(changeStatusCaseFetch, payload.id);
     if (answer[0] === 1) {
       payload.status
-        ? yield put(actions.setStatusZeroAC(payload.id))
-        : yield put(actions.setStatusOneAC(payload.id));
+        ? yield put(actions.setStatusFalseAC(payload.id))
+        : yield put(actions.setStatusTrueAC(payload.id));
       console.log('state  после изменения статуса', state);
       yield put(setLoadinFalse());
     }

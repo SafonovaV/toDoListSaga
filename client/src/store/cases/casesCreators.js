@@ -44,11 +44,11 @@ export const changeCaseErrAC = (err) => {
 export const startChangeStatusCaseAC = (oneCase) => {
   return { type: tp.START_CHANGE_STATUS_CASE, payload: oneCase };
 };
-export const setStatusZeroAC = (id) => {
-  return { type: tp.SET_STATUS_ZERO, payload: id };
+export const setStatusFalseAC = (id) => {
+  return { type: tp.SET_STATUS_FALSE, payload: id };
 };
-export const setStatusOneAC = (id) => {
-  return { type: tp.SET_STATUS_ONE, payload: id };
+export const setStatusTrueAC = (id) => {
+  return { type: tp.SET_STATUS_TRUE, payload: id };
 };
 export const changeStatusCaseErrAC = (err) => {
   return { type: tp.CHANGE_STATUS_CASE_ERR, payload: err };
