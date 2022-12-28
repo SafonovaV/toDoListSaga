@@ -31,3 +31,26 @@ export const editCaseFetch = async ({ title, description, caseId }) => {
   });
   return response.json();
 };
+
+export const changeStatusCaseFetch = async (id) => {
+  const response = await fetch(`http://localhost:3005/case/${id}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: null,
+  });
+  return response.json();
+};
+
+export const deleteCaseFetch = async (id) => {
+  const response = await fetch(`http://localhost:3005/case/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: null,
+  });
+  return response.json();
+};

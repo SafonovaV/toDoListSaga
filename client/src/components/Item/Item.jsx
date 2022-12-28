@@ -1,6 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { changeStatusAC, deleteCaseAC } from '../../store/cases/casesCreators';
+import {
+  startChangeStatusCaseAC,
+  startDeleteCaseAC,
+} from '../../store/cases/casesCreators';
 import { setVisModalTrue, initEditCase } from '../../store/modal/modalCreators';
 import cl from './Item.module.css';
 
@@ -9,11 +12,11 @@ export default function Item() {
   const cases = useSelector((state) => state.cases.cases);
 
   const changeStatus = (oneCase) => {
-    dispatch(changeStatusAC(oneCase));
+    dispatch(startChangeStatusCaseAC(oneCase));
   };
 
   const deleteItem = (id) => {
-    dispatch(deleteCaseAC(id));
+    dispatch(startDeleteCaseAC(id));
   };
   const modalFunction = (editCase) => {
     dispatch(setVisModalTrue());

@@ -1,13 +1,11 @@
 import * as tp from './casesType';
-import { setLoadinFalse, setLoadinTrue } from '../isLoading/creators';
-import { setVisModalFalse } from '../modal/modalCreators';
 
 export const startInitCasesAC = () => {
   return {
     type: tp.START_INIT_CASES,
   };
 };
-export const initCases = (allCases) => {
+export const initCasesAC = (allCases) => {
   return { type: tp.INIT_CASES, payload: allCases };
 };
 export const initCasesErrAC = (err) => {
@@ -22,133 +20,48 @@ export const startAddNewCaseAC = (title, description, setFormValue) => {
     payload: { title, description, setFormValue },
   };
 };
-export const addNewCase = (newCase) => {
+export const addNewCaseAC = (newCase) => {
   return { type: tp.ADD_CASES, payload: newCase };
 };
-export const addNewCaseErr = (error) => {
+export const addNewCaseErrAC = (error) => {
   return { type: tp.ADD_CASES_ERR, payload: error };
 };
 
 //-----------------------------------------------------
 
-export const startChangeCase = (title, description, caseId) => {
+export const startChangeCaseAC = (title, description, caseId) => {
   return { type: tp.START_EDIT_CASES, payload: { title, description, caseId } };
 };
-export const changeCase = (editCase) => {
+export const changeCaseAC = (editCase) => {
   return { type: tp.EDIT_CASES, payload: editCase };
 };
-export const changeCaseErr = (err) => {
+export const changeCaseErrAC = (err) => {
   return { type: tp.EDIT_CASES_ERR, payload: err };
 };
+
 //----------------------------------------------
 
-export const deleteCase = (id) => {
-  return { type: tp.DELETE_CASES, payload: id };
+export const startChangeStatusCaseAC = (oneCase) => {
+  return { type: tp.START_CHANGE_STATUS_CASE, payload: oneCase };
 };
-
-export const setStatusZero = (id) => {
+export const setStatusZeroAC = (id) => {
   return { type: tp.SET_STATUS_ZERO, payload: id };
 };
-
-export const setStatusOne = (id) => {
+export const setStatusOneAC = (id) => {
   return { type: tp.SET_STATUS_ONE, payload: id };
 };
-
-// export const getAllCasesAC = () => async (dispatch) => {
-//   dispatch(setLoadinTrue());
-//   try {
-//     const response = await fetch('http://localhost:3005/case/all', {
-//       method: 'GET',
-//       credentials: 'include',
-//     });
-//     const { allCases } = await response.json();
-
-//     dispatch(initCases(allCases));
-//     dispatch(setLoadinFalse());
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// export const editCaseAndModalAC = (e, id) => async (dispatch) => {
-//   dispatch(setLoadinTrue());
-//   dispatch(setVisModalFalse());
-
-//   const response = await fetch(`http://localhost:3005/case/${id}`, {
-//     method: 'PUT',
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//     body: JSON.stringify({ title, description }),
-//   });
-//   const { newEditCase } = await response.json();
-//   dispatch(changeCase(newEditCase));
-//   dispatch(setLoadinFalse());
-// };
-
-// export const creatNewCase = (e, setFormValue) => async (dispatch) => {
-//   dispatch(setLoadinTrue());
-
-//   const response = await fetch('http://localhost:3005/case', {
-//     method: 'POST',
-//     credentials: 'include',
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       title: title.value,
-//       description: description.value,
-//     }),
-//   });
-//   const { newCase } = await response.json();
-
-//   if (newCase) {
-//     dispatch(setLoadinFalse());
-//     dispatch(addNewCase(newCase));
-//     setFormValue({ title: '', description: '' });
-//   }
-// };
-
-export const changeStatusAC = (oneCase) => async (dispatch) => {
-  dispatch(setLoadinTrue());
-  try {
-    const response = await fetch(`http://localhost:3005/case/${oneCase.id}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: null,
-    });
-    const { answer } = await response.json();
-    if (answer[0] === 1) {
-      oneCase.status
-        ? dispatch(setStatusZero(oneCase.id))
-        : dispatch(setStatusOne(oneCase.id));
-
-      dispatch(setLoadinFalse());
-    }
-  } catch (error) {
-    console.log(error);
-  }
+export const changeStatusCaseErrAC = (err) => {
+  return { type: tp.CHANGE_STATUS_CASE_ERR, payload: err };
 };
 
-export const deleteCaseAC = (id) => async (dispatch) => {
-  dispatch(setLoadinTrue());
-  try {
-    const response = await fetch(`http://localhost:3005/case/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: null,
-    });
-    const answer = await response.json();
-    if (answer === 1) {
-      dispatch(deleteCase(id));
-      dispatch(setLoadinFalse());
-    }
-  } catch (error) {
-    console.log(error);
-  }
+//----------------------------------------------------------
+
+export const startDeleteCaseAC = (id) => {
+  return { type: tp.START_DELETE_CASES, payload: id };
+};
+export const deleteCaseAC = (id) => {
+  return { type: tp.DELETE_CASES, payload: id };
+};
+export const deleteCaseErrAC = (err) => {
+  return { type: tp.DELETE_CASES_ERR, payload: err };
 };

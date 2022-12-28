@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cl from './Edit.module.css';
-import { startChangeCase } from '../../store/cases/casesCreators';
+import { startChangeCaseAC } from '../../store/cases/casesCreators';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function Edit() {
     e.preventDefault();
     const title = e.target.title.value;
     const description = e.target.description.value;
-    dispatch(startChangeCase(title, description, editCase.id));
+    dispatch(startChangeCaseAC(title, description, editCase.id));
   };
 
   return (
