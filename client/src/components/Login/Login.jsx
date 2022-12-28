@@ -8,6 +8,8 @@ import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
 
 export default function Login() {
+  const error = useSelector((state) => state.isAuth.error);
+  console.log('error', error);
   const isLoading = useSelector(getIsLoading());
   const [formValue, setFormValue] = useState({
     email: '',
@@ -35,6 +37,9 @@ export default function Login() {
   }
   return (
     <Form className="container" onSubmit={auth}>
+      {error === 'Неверный логин или пароль' && (
+        <div style={{ color: 'red' }}>Неверный логин или пароль</div>
+      )}
       <Form.Group className="mb-3">
         <Form.Control
           name="email"

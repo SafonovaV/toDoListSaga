@@ -9,10 +9,6 @@ import {
   signUpFetch,
 } from './authFetch';
 import { setLoadinTrue, setLoadinFalse } from '../../store/isLoading/creators';
-import {
-  setErrAuthFalseAC,
-  setErrAuthTrueAC,
-} from '../../store/errorAuth/creators';
 
 function* checkAuth() {
   try {
@@ -32,40 +28,44 @@ function* authSignUp(state) {
   yield put(setLoadinTrue());
   const { login, password, email, navigate } = state.payload;
   try {
-    const { user } = yield call(signUpFetch, { login, password, email });
-    if (user) {
+    const res = yield call(signUpFetch, { login, password, email });
+    if (res.ok) {
+      const { user } = yield res.json();
       yield put(setLoadinFalse());
       yield put(actions.initAuthAC(user));
-      yield put(setErrAuthFalseAC());
+
       navigate('/home');
     } else {
-      yield put(setErrAuthTrueAC());
+      const { message } = yield res.json();
+      yield put(actions.initAuthErrAC(message));
       yield put(setLoadinFalse());
     }
   } catch (error) {
     console.log(error);
-    yield put(actions.initAuthErrAC(error));
+    yield put(actions.initAuthErrAC(error.message));
   }
 }
 
 function* loginAuth(state) {
-  console.log('state', state);
   try {
     yield put(setLoadinTrue());
     const { password, email, navigate } = state.payload;
-    const { user } = yield call(loginAuthFetch, { password, email });
-    console.log('user', user);
-    if (user) {
+    const res = yield call(loginAuthFetch, { password, email });
+
+    if (res.ok) {
+      const { user } = yield res.json();
       yield put(setLoadinFalse());
       yield put(actions.initAuthAC(user));
-      yield put(setErrAuthFalseAC());
       yield navigate('/home');
     } else {
-      yield put(setErrAuthTrueAC());
+      const { message } = yield res.json();
+      yield put(actions.initAuthErrAC(message));
+      yield put(setLoadinFalse());
     }
   } catch (error) {
     console.log(error);
-    yield put(actions.initAuthErrAC(error));
+    yield put(actions.initAuthErrAC(error.message));
+    yield put(setLoadinFalse());
   }
 }
 

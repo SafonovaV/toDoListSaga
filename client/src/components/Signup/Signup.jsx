@@ -8,6 +8,7 @@ import { getIsLoading } from '../../store/isLoading/selector';
 import AppLoader from '../Loading/Loading';
 
 function Signup() {
+  const error = useSelector((state) => state.isAuth.error);
   const isLoading = useSelector(getIsLoading());
   const [formValue, setFormValue] = useState({
     login: '',
@@ -36,6 +37,11 @@ function Signup() {
   if (isLoading) return <AppLoader />;
   return (
     <Form className="container" onSubmit={auth}>
+      {error === 'Пользователь с такой почтой уже существует' && (
+        <div style={{ color: 'red' }}>
+          Пользователь с такой почтой уже существует
+        </div>
+      )}
       <Form.Group className="mb-3">
         <Form.Control
           name="login"

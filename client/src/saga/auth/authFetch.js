@@ -19,7 +19,7 @@ export const signUpFetch = async ({ login, password, email }) => {
       email,
     }),
   });
-  return response.json();
+  return response;
 };
 
 export const loginAuthFetch = async ({ password, email }) => {
@@ -34,7 +34,7 @@ export const loginAuthFetch = async ({ password, email }) => {
       email,
     }),
   });
-  return response.json();
+  return response;
 };
 
 export const logoutFetch = async () => {

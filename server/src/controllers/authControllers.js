@@ -4,7 +4,6 @@ const { User } = require('../../db/models');
 const signUp = async (req, res) => {
   const { login, password, email } = req.body;
 
-  console.log('login, password, email', login, password, email);
   try {
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
@@ -16,11 +15,17 @@ const signUp = async (req, res) => {
     req.session.user = { name: newUser.login, id: newUser.id };
     req.session.save(() => {
       const { user } = req.session;
-      res.json({ user });
+      res.status(200).send({ user });
     });
   } catch (error) {
     console.log(error);
-    res.json({});
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      res
+        .status(406)
+        .send({ message: 'Пользователь с такой почтой уже существует' });
+    } else {
+      res.status(500).send({ message: 'Oшибка сервера' });
+    }
   }
 };
 
@@ -35,15 +40,15 @@ const logIn = async (req, res) => {
       req.session.user = { name: findUser.login, id: findUser.id };
       req.session.save(() => {
         const { user } = req.session;
-        console.log('user', user);
-        res.json({ user });
+
+        res.status(200).send({ user });
       });
     } else {
-      res.json({});
+      res.status(401).send({ message: 'Неверный логин или пароль' });
     }
   } catch (error) {
     console.log(error);
-    res.json({});
+    res.status(500).send({ message: 'Oшибка сервера' });
   }
 };
 
